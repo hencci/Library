@@ -7,6 +7,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class = "container">
+        <div class = "header">
+            <img src = "images/open-book.png" alt = "Book">
+            <h1>My Personal Library</h1>
+        </div>
+        
+        <div class = "books">
+            <div class = "add-new book">
+                <span class = "material-symbols-outlined"><img src = "images/add.png" alt = "add">
+                </span>
+            </div>
+
+            <div id = "new-entry" class = "book" style = "display: none;">
+                <form id = "new-book" action = "#" method = "post">
+                    <textarea class = "title" id = "new-book-title" name = "new-book-title" placeholder = "Book Title" required></textarea>
+                    <input type = "text" class = "author" id = "new-book-author" name = "new-book-author" placeholder = "Book Author" required>
+                    <div>
+                        <input type = "number" id = "new-book-pages" name = "new-book-pages" placeholder = "Number of pages" required>
+                        <div class = "read-align">
+                            <label for = "read">read</label>
+                            <input type = "checkbox" id="read" name = "read">
+                        </div>
+                    </div>
+                    <button type = "submit" id = "new-book-submit" class = "btn">Add book</button>
+                </form>
+            </div>
+
+            <div class = "book">
+                <p class = "title">Lord of the Books</p>
+                <p class = "author">Author P. Writer</p>
+                <p class = "pages">100 pages</p>
+                <p class = "read">Read</p>
+            </div>
+        </div>
+        
+    </div>
     
     <script src="script.js"></script>
 </body>
