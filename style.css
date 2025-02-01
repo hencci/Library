@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: #0284C7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: cursive;
+    color: bisque;
+    height: 5rem;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 1fr 6fr;
+    height: 100vh;
+}
+
+.books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    background-image: url(images/Books.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    gap: 16px;
+    padding: 30px;
+}
+
+@keyframes spawn-in {
+    from {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.book {
+    animation: spawn-in 700ms;
+    background-color: rgba(156, 188, 240, 0.8);
+    padding: 16px;
+    height: 400px; 
+    width: 300px;
+    border: 2px solid brown;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1.5fr 1fr 1fr 1fr;
+    justify-self: center; 
+    align-self: start;
+    color: #6c3a19;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition: 200ms;
+}
+
+.material-symbols-outlined {
+    font-size: 70px !important;
+    align-self: center;
+    justify-self: center;
+    grid-area: 1 / 1/ 4/ 3;
+    transform: translateY(30px);
+}
+
+.add-new:hover {
+    transform: scale(97%);
+    background: #0284C7;
+    cursor: pointer;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center; 
+    grid-area: 1 / 1 / 1 / 3;
+  
+}
+
+.author {
+    grid-column: 1 / 3;
+    grid-row: 3 / 3;
+    align-self:flex-start;
+    justify-self: center;
+    font-size: 25px;;
+}
+
+.pages, .read {
+    align-self: end;
+    font-size: 20px;
+    grid-row: 4 / 4;
+}
+
+.read {
+    justify-self: end;
+    font-weight: bold;
+    background-color: rgb(38, 238, 45);
+    padding: 5px;
+    border-radius: 10px;
+}
