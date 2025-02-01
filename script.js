@@ -10,3 +10,7 @@ function Book(title, author, pages, read) {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readStatus}`;
     };
 }
+
+function addBookToLibrary(title, author, pages, read) {
+    
+}
