@@ -48,5 +48,5 @@ newBookButton.addEventListener("click", (e) => {
 });
 
 newBookSubmitButton.addEventListener("click", (e) => {
-    
+    e.preventDefault();
 })
