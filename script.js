@@ -88,4 +88,5 @@ newBookSubmitButton.addEventListener("click", (e) => {
 })
 
 addBookToLibrary(nameField.value, authorField.value, pagesField.value, read);
-console.log(`read ${read}`)
+console.log(`read ${read}`);
+document.querySelector("#new-book").reset();
