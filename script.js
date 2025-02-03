@@ -54,4 +54,35 @@ newBookSubmitButton.addEventListener("click", (e) => {
     let authorField = document.querySelector("#new-book-author");
     let pagesField = document.querySelector("#new-book-pages");
     let read = document.querySelector("#read").checked;
+
+    let isValid = true;
+
+    if (!nameField.value) {
+        nameField.classList.add('input-error');
+        isValid = false;
+    }
+    else {
+        nameField.classList.remove('input-error');
+    }
+
+    if (!authorField.value) {
+        authorField.classList.add('input-error');
+        isValid = false;
+    }
+    else {
+        authorField.classList.remove('input-error');
+    }
+
+    if (!pagesField.value) {
+        pagesField.classList.add('input-error');
+        isValid = false;
+    }
+    else {
+        pagesField.classList.remove('input-error');
+    }
+
+    if (!isValid) {
+    console.log("Please fill out all required fields.");
+    return;
+    }
 })
