@@ -27,4 +27,8 @@ function addBookToLibrary(title, author, pages, read) {
         readStats = '';
     }
     console.log(readStats)
+
+    let latestBookAdded = document.querySelector(".books .book:nth-child(3)")
+    newBookBoard.setAttribute("style", "display:none;");
+    console.log(latestBookAdded);
 }
