@@ -109,3 +109,105 @@ h1 {
     padding: 5px;
     border-radius: 10px;
 }
+
+#new-entry {
+    display: flex;
+    flex-direction: column;
+}
+
+#new-book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#new-book input {
+    max-width: 100%; 
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+textarea {
+    resize: none;
+    line-height: 1.2;
+    text-align: center;
+    vertical-align: middle;
+    color: #6c3a19;
+    width: 100%;
+}
+
+textarea::placeholder {
+    text-align: center;
+    vertical-align: middle;
+    line-height: inherit;
+}
+
+#new-book-submit {
+    border-radius: 10px;
+}
+
+#new-book-submit:hover {
+    background-color: #0284C7;
+    color: white;
+    cursor: pointer;
+}
+
+.btn {
+    padding: 10px 50px;
+    border: 2px solid #6c3a19 ;
+    background: transparent;
+    font-size: 2rem;
+    display: inline-block;
+    color: #6c3a19;
+    height: 140px;
+}
+
+#new-book > * {
+    margin: 5px;
+}
+
+#new-book-author {
+    height: 34px;
+    align-self: center;
+    width: 100%;
+    overflow-wrap: break-word;
+    color: #6c3a19;
+}
+
+input {
+    overflow-wrap: break-word;
+}
+
+#new-book-pages {
+    height: 30px;
+    width: 80%;
+    color: #6c3a19;
+
+}
+
+#new-book > *:nth-child(3) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#new-book > *:nth-child(3) > * {
+    margin: 5px;
+}
+
+.read-align {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    transform: translateY(-8px);
+}
+
+#read {
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.input-error {
+    border: 2px solid red !important;
+}
