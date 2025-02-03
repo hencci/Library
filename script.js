@@ -46,3 +46,7 @@ function addBookToLibrary(title, author, pages, read) {
 newBookButton.addEventListener("click", (e) => {
     newBookBoard.toggleAttribute("style");
 });
+
+newBookSubmitButton.addEventListener("click", (e) => {
+    
+})
