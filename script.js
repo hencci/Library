@@ -49,4 +49,9 @@ newBookButton.addEventListener("click", (e) => {
 
 newBookSubmitButton.addEventListener("click", (e) => {
     e.preventDefault();
+
+    let nameField = document.querySelector("#new-book-title");
+    let authorField = document.querySelector("#new-book-author");
+    let pagesField = document.querySelector("#new-book-pages");
+    let read = document.querySelector("#read").checked;
 })
