@@ -18,6 +18,7 @@ let newBookButton = document.querySelector(".add-new");
 
 function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
 
     let readStats;
     console.log(read);
