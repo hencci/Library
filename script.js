@@ -85,8 +85,8 @@ newBookSubmitButton.addEventListener("click", (e) => {
     console.log("Please fill out all required fields.");
     return;
     }
-})
 
-addBookToLibrary(nameField.value, authorField.value, pagesField.value, read);
-console.log(`read ${read}`);
-document.querySelector("#new-book").reset();
+    addBookToLibrary(nameField.value, authorField.value, pagesField.value, read);
+    console.log(`read ${read}`);
+    document.querySelector("#new-book").reset();
+});
