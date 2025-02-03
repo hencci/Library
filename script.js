@@ -31,4 +31,13 @@ function addBookToLibrary(title, author, pages, read) {
     let latestBookAdded = document.querySelector(".books .book:nth-child(3)")
     newBookBoard.setAttribute("style", "display:none;");
     console.log(latestBookAdded);
+    latestBookAdded.insertAdjacentHTML("beforebegin",
+        `<div class = "book">
+            <div class = "title">${title}</div>
+            <div class = "author">${author}</div>
+            <div class = "pages">${pages} pages</div>
+            ${readStats}
+        </div>`
+    );
+    return newBook;
 }
