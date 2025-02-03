@@ -17,4 +17,14 @@ let newBookSubmitButton = document.querySelector("#new-book-submit");
 let newBookButton = document.querySelector(".add-new");
 
 function addBookToLibrary(title, author, pages, read) {
+    let newBook = new Book(title, author, pages, read);
+
+    let readStats;
+    console.log(read);
+    if (read === true){
+        readStats = '<p class="read">Read</p>'
+    } else {
+        readStats = '';
+    }
+    console.log(readStats)
 }
