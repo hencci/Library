@@ -1,4 +1,4 @@
-const myLibrary = [];
+const myLibrary = JSON.parse(localStorage.getItem("library")) || [];
 
 class Book {
     constructor(title, author, pages, read) {
@@ -8,7 +8,6 @@ class Book {
         this.read = read;
     }
 
-    // Method to return info about the book
     info() {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? 'Read' : 'Not read'}`;
     }
@@ -19,6 +18,11 @@ let newBookBoard = document.querySelector("#new-entry");
 let newBookSubmitButton = document.querySelector("#new-book-submit");
 let newBookButton = document.querySelector(".add-new");
 
+// Save books to Local Storage
+function saveLibraryToStorage() {
+    localStorage.setItem("library", JSON.stringify(myLibrary));
+}
+
 // Function to toggle the read status of a book
 function toggleReadStatus(bookElement, book) {
     book.read = !book.read; // Toggle the read status
@@ -26,12 +30,15 @@ function toggleReadStatus(bookElement, book) {
     readStatus.textContent = book.read ? 'Read' : 'Not read';
     readStatus.classList.toggle('read', book.read);
     readStatus.classList.toggle('not-read', !book.read);
+
+    saveLibraryToStorage();
 }
 
 // Function to add a new book to the library
 function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
+    saveLibraryToStorage();
 
     // Create a new div element for the book
     let bookElement = document.createElement('div');
@@ -54,6 +61,11 @@ function addBookToLibrary(title, author, pages, read) {
 
     return newBook;
 }
+
+// Load books from Local Storage on page load
+document.addEventListener("DOMContentLoaded", () => {
+    myLibrary.forEach((book) => addBookToLibrary(book.title, book.author, book.pages, book.read));
+});
 
 // Event listener to show the new book form
 newBookButton.addEventListener("click", () => {
