@@ -64,7 +64,24 @@ function addBookToLibrary(title, author, pages, read) {
 
 // Load books from Local Storage on page load
 document.addEventListener("DOMContentLoaded", () => {
-    myLibrary.forEach((book) => addBookToLibrary(book.title, book.author, book.pages, book.read));
+    myLibrary.forEach((book) => {
+        // Directly create UI elements without re-adding books to myLibrary
+        let bookElement = document.createElement('div');
+        bookElement.classList.add('book');
+
+        bookElement.innerHTML = `
+            <div class="title">${book.title}</div>
+            <div class="author">${book.author}</div>
+            <div class="pages">${book.pages} pages</div>
+            <p class="read-status ${book.read ? 'read' : 'not-read'}">${book.read ? 'Read' : 'Not read'}</p>
+        `;
+
+        bookContainer.appendChild(bookElement);
+
+        // Add event listener to toggle the read status when clicked
+        const readStatusElement = bookElement.querySelector('.read-status');
+        readStatusElement.addEventListener('click', () => toggleReadStatus(bookElement, book));
+    });
 });
 
 // Event listener to show the new book form
