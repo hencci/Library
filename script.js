@@ -63,6 +63,13 @@ function addBookToLibrary(title, author, pages, read) {
     return newBook;
 }
 
+// Function to remove a book from the library
+function removeBook(bookElement, book) {
+    myLibrary.splice(myLibrary.indexOf(book), 1); // Remove from array
+    saveLibraryToStorage(); // Update local storage
+    bookElement.remove(); // Remove from UI
+}
+
 // Load books from Local Storage on page load
 document.addEventListener("DOMContentLoaded", () => {
     myLibrary.forEach((book) => {
