@@ -50,6 +50,7 @@ function addBookToLibrary(title, author, pages, read) {
         <div class="author">${author}</div>
         <div class="pages">${pages} pages</div>
         <p class="read-status ${read ? 'read' : 'not-read'}">${read ? 'Read' : 'Not read'}</p>
+        <button class="remove-btn">Remove</button>
     `;
 
     // Append the new book to the container
