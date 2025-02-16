@@ -60,6 +60,9 @@ function addBookToLibrary(title, author, pages, read) {
     const readStatusElement = bookElement.querySelector('.read-status');
     readStatusElement.addEventListener('click', () => toggleReadStatus(bookElement, newBook));
 
+    const removeButton = bookElement.querySelector('.remove-btn');
+    removeButton.addEventListener('click', () => removeBook(bookElement, newBook));
+
     return newBook;
 }
 
