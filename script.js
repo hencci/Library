@@ -92,6 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add event listener to toggle the read status when clicked
         const readStatusElement = bookElement.querySelector('.read-status');
         readStatusElement.addEventListener('click', () => toggleReadStatus(bookElement, book));
+
+        const removeButton = bookElement.querySelector('.remove-btn');
+        removeButton.addEventListener('click', () => removeBook(bookElement, book));
     });
 });
 
