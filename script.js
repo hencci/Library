@@ -36,6 +36,10 @@ function toggleReadStatus(bookElement, book) {
 
 // Function to add a new book to the library
 function addBookToLibrary(title, author, pages, read) {
+    // Normalize title and author (case insensitive)
+    const normalizedTitle = title.trim().toLowerCase();
+    const normalizedAuthor = author.trim().toLowerCase();
+
     let newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
     saveLibraryToStorage();
