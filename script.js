@@ -125,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="author">${book.author}</div>
             <div class="pages">${book.pages} pages</div>
             <p class="read-status ${book.read ? 'read' : 'not-read'}">${book.read ? 'Read' : 'Not read'}</p>
+            <p class="count">Copies: ${book.count || 1}</p>
             <button class="remove-btn">Remove</button>
         `;
 
