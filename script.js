@@ -46,6 +46,12 @@ function addBookToLibrary(title, author, pages, read) {
         book.author.toLowerCase() === normalizedAuthor
     );
 
+    if (existingBook) {
+        // If book exists, increase the count
+        existingBook.count = (existingBook.count || 1) + 1;
+        saveLibraryToStorage();
+    }
+
     let newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
     saveLibraryToStorage();
