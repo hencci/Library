@@ -67,6 +67,7 @@ function addBookToLibrary(title, author, pages, read) {
 
     // If book does not exist, add it as a new entry
     let newBook = new Book(title, author, pages, read);
+    newBook.count = 1; // Initialize count
     myLibrary.push(newBook);
     saveLibraryToStorage();
 
