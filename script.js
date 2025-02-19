@@ -92,6 +92,7 @@ function addBookToLibrary(title, author, pages, read) {
     const readStatusElement = bookElement.querySelector('.read-status');
     readStatusElement.addEventListener('click', () => toggleReadStatus(bookElement, newBook));
 
+    // Add event listener to remove book
     const removeButton = bookElement.querySelector('.remove-btn');
     removeButton.addEventListener('click', () => removeBook(bookElement, newBook));
 
