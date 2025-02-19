@@ -40,6 +40,12 @@ function addBookToLibrary(title, author, pages, read) {
     const normalizedTitle = title.trim().toLowerCase();
     const normalizedAuthor = author.trim().toLowerCase();
 
+    // Check if the book already exists
+    let existingBook = myLibrary.find(book => 
+        book.title.toLowerCase() === normalizedTitle && 
+        book.author.toLowerCase() === normalizedAuthor
+    );
+
     let newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
     saveLibraryToStorage();
