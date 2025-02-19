@@ -99,11 +99,18 @@ function addBookToLibrary(title, author, pages, read) {
     return newBook;
 }
 
-// Function to remove a book from the library
+// Function to remove a book or decrease count from the library
 function removeBook(bookElement, book) {
-    myLibrary.splice(myLibrary.indexOf(book), 1); // Remove from array
-    saveLibraryToStorage(); // Update local storage
-    bookElement.remove(); // Remove from UI
+    if (book.count > 1) {
+        book.count -= 1; // Decrease count
+        saveLibraryToStorage();
+        bookElement.querySelector('.count').textContent = `Copies: ${book.count}`;
+    }
+    else {
+        myLibrary.splice(myLibrary.indexOf(book), 1); // Remove from array
+        saveLibraryToStorage(); // Update local storage
+        bookElement.remove(); // Remove from UI
+    }
 }
 
 // Load books from Local Storage on page load
