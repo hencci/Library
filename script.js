@@ -47,21 +47,24 @@ function addBookToLibrary(title, author, pages, read) {
     );
 
     if (existingBook) {
-        // If book exists, increase the count
-        existingBook.count = (existingBook.count || 1) + 1;
-        saveLibraryToStorage();
+        // Prompt the user before increasing the count
+        let confirmAdd = confirm(`"${title}" by ${author} already exists. Do you want to increase its count?`);
+        if (confirmAdd) {
+            // If book exists, increase the count
+            existingBook.count = (existingBook.count || 1) + 1;
+            saveLibraryToStorage();
 
-        // Find the corresponding UI element and update its count
-        let bookElements = document.querySelectorAll('.book');
-        bookElements.forEach(bookElement => {
-            let titleElement = bookElement.querySelector('.title').textContent.trim().toLowerCase();
-            let authorElement = bookElement.querySelector('.author').textContent.trim().toLowerCase();
-            if (titleElement === normalizedTitle && authorElement === normalizedAuthor) {
-                let countElement = bookElement.querySelector('.count');
-                countElement.textContent = `Copies: ${existingBook.count}`;
-            }
-        });
-
+            // Find the corresponding UI element and update its count
+            let bookElements = document.querySelectorAll('.book');
+            bookElements.forEach(bookElement => {
+                let titleElement = bookElement.querySelector('.title').textContent.trim().toLowerCase();
+                let authorElement = bookElement.querySelector('.author').textContent.trim().toLowerCase();
+                if (titleElement === normalizedTitle && authorElement === normalizedAuthor) {
+                    let countElement = bookElement.querySelector('.count');
+                    countElement.textContent = `Copies: ${existingBook.count}`;
+                }
+            });
+        }
         return;
     }
 
