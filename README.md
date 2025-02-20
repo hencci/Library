@@ -17,6 +17,7 @@ This is a library built using JavaScript, HTML, and CSS. The library allows user
 * **HTML**: Structure of the web page.
 * **CSS**: Styling and layout of the page.
 * **JavaScript**: Logic for handling user inputs.
+* **Local storage** Store user input data
 
 ## Installation
 
@@ -30,7 +31,7 @@ This is a library built using JavaScript, HTML, and CSS. The library allows user
 
 1. Open the application in your browser.
 2. Click button to add new book.
-3. Fill form, and add bookto library.
+3. Fill form, and add book to library.
 
 ### Screenshot
 
