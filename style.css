@@ -67,7 +67,7 @@ h1 {
 }
 
 .material-symbols-outlined {
-    font-size: 70px !important;
+    font-size: 40px !important;
     align-self: center;
     justify-self: center;
     grid-area: 1 / 2/ 4/ 3;
@@ -84,12 +84,22 @@ h1 {
     font-weight: bold;
     font-size: 1.5rem;
     text-align: center; 
-    grid-area: 1 / 1 / 1 / 4;
+    grid-area: 1 / 1 / 1 / 5;
   
 }
 
+.count {
+    grid-column: 4 / 5;
+    grid-row: 1 / 1;
+    align-self: start;
+    justify-self: right;
+    background-color: black;
+    color: white;
+    padding: 0.25rem 0.5rem;
+}
+
 .author {
-    grid-column: 1 / 4;
+    grid-column: 1 / 5;
     grid-row: 3 / 3;
     align-self:center;
     justify-self: center;
@@ -113,11 +123,21 @@ h1 {
 
 .read {
     background-color: rgb(38, 238, 45);
+    grid-column: 2 / 4;
 }
 
 .not-read {
     background-color: rgb(238, 38, 38);
-}   
+    grid-column: 2 / 4;
+}
+
+.pages {
+    grid-column: 1 / 2;
+}
+
+.remove-btn {
+    grid-column: 4 / 5;
+}
 
 #new-entry {
     display: flex;
