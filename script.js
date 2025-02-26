@@ -1,15 +1,16 @@
 const myLibrary = JSON.parse(localStorage.getItem("library")) || [];
 
 class Book {
-    constructor(title, author, pages, read) {
+    constructor(title, author, pages, read, count = 1) {
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.read = read;
+        this.count = count;
     }
 
     info() {
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? 'Read' : 'Not read'}`;
+        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? 'Read' : 'Not read'}, Copies: ${this.count}`;
     }
 }
 
@@ -25,81 +26,12 @@ function saveLibraryToStorage() {
 
 // Function to toggle the read status of a book
 function toggleReadStatus(bookElement, book) {
-    book.read = !book.read; // Toggle the read status
+    book.read = !book.read;
     const readStatus = bookElement.querySelector('.read-status');
     readStatus.textContent = book.read ? 'Read' : 'Not read';
     readStatus.classList.toggle('read', book.read);
     readStatus.classList.toggle('not-read', !book.read);
-
     saveLibraryToStorage();
-}
-
-// Function to add a new book to the library
-function addBookToLibrary(title, author, pages, read) {
-    // Normalize title and author (case insensitive)
-    const normalizedTitle = title.trim().toLowerCase();
-    const normalizedAuthor = author.trim().toLowerCase();
-
-    // Check if the book already exists
-    let existingBook = myLibrary.find(book => 
-        book.title.toLowerCase() === normalizedTitle && 
-        book.author.toLowerCase() === normalizedAuthor
-    );
-
-    if (existingBook) {
-        // Prompt the user before increasing the count
-        let confirmAdd = confirm(`"${title}" by ${author} already exists. Do you want to increase its count?`);
-        if (confirmAdd) {
-            // If book exists, increase the count
-            existingBook.count = (existingBook.count || 1) + 1;
-            saveLibraryToStorage();
-
-            // Find the corresponding UI element and update its count
-            let bookElements = document.querySelectorAll('.book');
-            bookElements.forEach(bookElement => {
-                let titleElement = bookElement.querySelector('.title').textContent.trim().toLowerCase();
-                let authorElement = bookElement.querySelector('.author').textContent.trim().toLowerCase();
-                if (titleElement === normalizedTitle && authorElement === normalizedAuthor) {
-                    let countElement = bookElement.querySelector('.count');
-                    countElement.textContent = `Copies: ${existingBook.count}`;
-                }
-            });
-        }
-        return;
-    }
-
-    // If book does not exist, add it as a new entry
-    let newBook = new Book(title, author, pages, read);
-    newBook.count = 1; // Initialize count
-    myLibrary.push(newBook);
-    saveLibraryToStorage();
-
-    // Create a new div element for the book
-    let bookElement = document.createElement('div');
-    bookElement.classList.add('book');
-
-    // Add book details to the new div
-    bookElement.innerHTML = `
-        <div class="title">${title}</div>
-        <div class="author">${author}</div>
-        <div class="pages">${pages} pages</div>
-        <p class="read-status ${read ? 'read' : 'not-read'}">${read ? 'Read' : 'Not read'}</p>
-        <p class="count">Copies: 1</p>
-        <button class="remove-btn">Remove</button>
-    `;
-
-    // Append the new book to the container
-    bookContainer.appendChild(bookElement);
-
-    // Add event listener to toggle the read status when clicked
-    const readStatusElement = bookElement.querySelector('.read-status');
-    readStatusElement.addEventListener('click', () => toggleReadStatus(bookElement, newBook));
-
-    // Add event listener to remove book
-    const removeButton = bookElement.querySelector('.remove-btn');
-    removeButton.addEventListener('click', () => removeBook(bookElement, newBook));
-
-    return newBook;
 }
 
 // Function to remove a book or decrease count from the library
@@ -116,31 +48,65 @@ function removeBook(bookElement, book) {
     }
 }
 
+// Function to add a new book to the library
+function addBookToLibrary(title, author, pages, read) {
+    // Check if the book already exists
+    const existingBook = myLibrary.find(book => book.title.toLowerCase() === title.trim().toLowerCase() && book.author.toLowerCase() === author.trim().toLowerCase());
+    
+    if (existingBook) {
+        // Prompt the user before increasing the count
+        if (confirm("This book already exists. Do you want to increase the count?")) {
+            existingBook.count++; // If book exists, increase the count
+            updateBookCount(existingBook);
+            saveLibraryToStorage();
+            return;
+        }
+    } else {
+        // If book does not exist, add it as a new entry
+        let newBook = new Book(title, author, pages, read);
+        myLibrary.push(newBook);
+        saveLibraryToStorage();
+        displayBook(newBook);
+    }
+}
+
+// Function to display book
+function displayBook(book) {
+    let bookElement = document.createElement('div'); // Create a new div element for the book
+    bookElement.classList.add('book');
+    bookElement.dataset.title = book.title.toLowerCase();
+    bookElement.dataset.author = book.author.toLowerCase();
+
+    // Add book details to the new div
+    bookElement.innerHTML = `
+        <div class="title">${book.title}</div>
+        <div class="author">${book.author}</div>
+        <div class="pages">${book.pages} pages</div>
+        <p class="read-status ${book.read ? 'read' : 'not-read'}">${book.read ? 'Read' : 'Not read'}</p>
+        <p class="count">Copies: ${book.count}</p>
+        <button class="remove-btn">Remove</button>
+    `;
+
+    bookContainer.appendChild(bookElement);
+
+    // Add event listener to toggle the read status when clicked
+    bookElement.querySelector('.read-status').addEventListener('click', () => toggleReadStatus(bookElement, book));
+    // Event listener for the remove button
+    bookElement.querySelector(".remove-btn").addEventListener("click", () => removeBook(bookElement, book));
+}
+
+// Function to update count
+function updateBookCount(book) {
+    const bookElement = document.querySelector(`.book[data-title="${book.title.toLowerCase()}"][data-author="${book.author.toLowerCase()}"]`);
+    if (bookElement) {
+        const countElement = bookElement.querySelector('.count');
+        countElement.textContent = `Copies: ${book.count}`;
+    }
+}
+
 // Load books from Local Storage on page load
 document.addEventListener("DOMContentLoaded", () => {
-    myLibrary.forEach((book) => {
-        // Directly create UI elements without re-adding books to myLibrary
-        let bookElement = document.createElement('div');
-        bookElement.classList.add('book');
-
-        bookElement.innerHTML = `
-            <div class="title">${book.title}</div>
-            <div class="author">${book.author}</div>
-            <div class="pages">${book.pages} pages</div>
-            <p class="read-status ${book.read ? 'read' : 'not-read'}">${book.read ? 'Read' : 'Not read'}</p>
-            <p class="count">Copies: ${book.count || 1}</p>
-            <button class="remove-btn">Remove</button>
-        `;
-
-        bookContainer.appendChild(bookElement);
-
-        // Add event listener to toggle the read status when clicked
-        const readStatusElement = bookElement.querySelector('.read-status');
-        readStatusElement.addEventListener('click', () => toggleReadStatus(bookElement, book));
-
-        const removeButton = bookElement.querySelector('.remove-btn');
-        removeButton.addEventListener('click', () => removeBook(bookElement, book));
-    });
+    myLibrary.forEach(displayBook);
 });
 
 // Event listener to show the new book form
@@ -189,7 +155,6 @@ newBookSubmitButton.addEventListener("click", (e) => {
 
     // Add the new book to the library
     addBookToLibrary(nameField.value, authorField.value, pagesField.value, read);
-    console.log(`read: ${read}`);
     
     // Reset the form fields
     document.querySelector("#new-book").reset();
